@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tính dây đồng</title>
+
+<style>
+body{
+font-family: Arial;
+padding:40px;
+}
+
+input{
+width:100%;
+font-size:18px;
+padding:10px;
+}
+
+#kq{
+margin-top:20px;
+font-size:18px;
+white-space:pre-line;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Tính dây đồng tương đương</h2>
+
+<input id="input" placeholder="Nhập ví dụ: 0.65 0.65 0.8">
+
+<div id="kq"></div>
+
+<script>
+
+let input = document.getElementById("input");
+let kq = document.getElementById("kq");
+
+input.addEventListener("input", tinh);
+
+function tinh(){
+
+let text = input.value.trim();
+
+if(text==""){
+kq.innerText="";
+return;
+}
+
+let arr = text.split(" ");
+
+let tong=0;
+
+for(let i=0;i<arr.length;i++){
+
+let d=parseFloat(arr[i]);
+
+if(!isNaN(d)){
+tong += Math.PI*d*d/4;
+}
+
+}
+
+let dTong = Math.sqrt((4*tong)/Math.PI);
+
+let out="Đường kính tương đương:\n"+dTong+" mm\n\n";
+
+for(let i=2;i<=10;i++){
+
+let s=tong/i;
+
+let d=Math.sqrt((4*s)/Math.PI);
+
+out+=i+" sợi: "+d+" mm\n";
+
+}
+
+kq.innerText=out;
+
+}
+
+</script>
+
+</body>
+</html>
