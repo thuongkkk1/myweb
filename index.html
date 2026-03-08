@@ -14,10 +14,11 @@ padding:20px;
 input{
 font-size:16px;
 padding:6px;
-border:3px solid #333;   /* viền đậm */
-border-radius:6px;       /* bo góc cho đẹp */
+border:3px solid #333;
+border-radius:6px;
 outline:none;
 }
+
 details{
 margin:6px 0;
 }
@@ -39,6 +40,8 @@ border-radius:4px;
 <h3>Nhập đường kính dây (ví dụ: 0.65,0.65)</h3>
 <input id="input" style="width:300px">
 
+<div id="dk"></div>
+
 <h3>Nhập công suất motor (kW)</h3>
 <input id="kw" style="width:120px">
 
@@ -48,6 +51,7 @@ border-radius:4px;
 
 let input = document.getElementById("input");
 let kwInput = document.getElementById("kw");
+let dk = document.getElementById("dk");
 let kq = document.getElementById("kq");
 
 input.addEventListener("input", tinh);
@@ -58,6 +62,7 @@ function tinh(){
 let text = input.value.trim();
 
 if(text==""){
+dk.innerHTML="";
 kq.innerHTML="";
 return;
 }
@@ -81,10 +86,11 @@ let dTong = Math.sqrt((4*tong)/Math.PI);
 let tietDien = tong;
 let ampe = tietDien * 5;
 
-let html="";
+dk.innerHTML =
+"<b>Đường kính tương đương:</b><br>"+
+dTong.toFixed(3)+" mm<br><br>";
 
-html+="<b>Đường kính tương đương:</b><br>";
-html+=dTong.toFixed(3)+" mm<br><br>";
+let html="";
 
 html+="Tiết diện: "+tietDien.toFixed(3)+" mm²<br>";
 html+="Dòng chịu được ≈ "+ampe.toFixed(2)+" A<br><br>";
@@ -93,7 +99,6 @@ let kw = parseFloat(kwInput.value);
 
 if(!isNaN(kw)){
 
-// công thức dòng motor 3 pha
 let motorA = (kw * 1000) / (1.732 * 380 * 0.8 * 0.9);
 
 html+="<b>Dòng motor ≈ "+motorA.toFixed(2)+" A</b><br>";
