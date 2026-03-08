@@ -84,6 +84,7 @@ tong += Math.PI*d*d/4;
 let dTong = Math.sqrt((4*tong)/Math.PI);
 
 let tietDien = tong;
+
 let ampe = tietDien * 5;
 
 let top="";
@@ -102,14 +103,25 @@ let kw = parseFloat(kwInput.value);
 
 if(!isNaN(kw)){
 
-let motorA = (kw * 1000) / (1.732 * 380 * 0.8 * 0.9);
+// motor 3 pha
+let motor3 = (kw * 1000) / (1.732 * 380 * 0.8 * 0.9);
 
-html+="<b>Dòng motor ≈ "+motorA.toFixed(2)+" A</b><br>";
+// motor 1 pha
+let motor1 = (kw * 1000) / (220 * 0.8 * 0.9);
 
-if(ampe > motorA){
-html+="✅ Dây đủ tải<br><br>";
+html+="<b>Dòng motor 3 pha ≈ "+motor3.toFixed(2)+" A</b><br>";
+html+="<b>Dòng motor 1 pha ≈ "+motor1.toFixed(2)+" A</b><br><br>";
+
+if(ampe > motor3){
+html+="✅ Dây đủ tải cho motor 3 pha<br>";
 }else{
-html+="❌ Dây yếu<br><br>";
+html+="❌ Dây yếu cho motor 3 pha<br>";
+}
+
+if(ampe > motor1){
+html+="✅ Dây đủ tải cho motor 1 pha<br><br>";
+}else{
+html+="❌ Dây yếu cho motor 1 pha<br><br>";
 }
 
 }
@@ -117,6 +129,7 @@ html+="❌ Dây yếu<br><br>";
 for(let i=2;i<=10;i++){
 
 let s=tong/i;
+
 let d=Math.sqrt((4*s)/Math.PI);
 
 html+=i+" sợi: "+d.toFixed(3)+" mm<br>";
