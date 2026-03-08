@@ -40,7 +40,7 @@ border-radius:4px;
 <h3>Nhập đường kính dây (ví dụ: 0.65,0.65)</h3>
 <input id="input" style="width:300px">
 
-<div id="dk"></div>
+<div id="top"></div>
 
 <h3>Nhập công suất motor (kW)</h3>
 <input id="kw" style="width:120px">
@@ -51,7 +51,7 @@ border-radius:4px;
 
 let input = document.getElementById("input");
 let kwInput = document.getElementById("kw");
-let dk = document.getElementById("dk");
+let topDiv = document.getElementById("top");
 let kq = document.getElementById("kq");
 
 input.addEventListener("input", tinh);
@@ -62,7 +62,7 @@ function tinh(){
 let text = input.value.trim();
 
 if(text==""){
-dk.innerHTML="";
+topDiv.innerHTML="";
 kq.innerHTML="";
 return;
 }
@@ -86,14 +86,17 @@ let dTong = Math.sqrt((4*tong)/Math.PI);
 let tietDien = tong;
 let ampe = tietDien * 5;
 
-dk.innerHTML =
-"<b>Đường kính tương đương:</b><br>"+
-dTong.toFixed(3)+" mm<br><br>";
+let top="";
+
+top+="<b>Đường kính tương đương:</b><br>";
+top+=dTong.toFixed(3)+" mm<br><br>";
+
+top+="Tiết diện: "+tietDien.toFixed(3)+" mm²<br>";
+top+="Dòng chịu được ≈ "+ampe.toFixed(2)+" A<br><br>";
+
+topDiv.innerHTML = top;
 
 let html="";
-
-html+="Tiết diện: "+tietDien.toFixed(3)+" mm²<br>";
-html+="Dòng chịu được ≈ "+ampe.toFixed(2)+" A<br><br>";
 
 let kw = parseFloat(kwInput.value);
 
