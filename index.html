@@ -109,19 +109,6 @@ let motor3 = (kw * 1000) / (1.732 * 380 * 0.8 * 0.9);
 // motor 1 pha
 let motor1 = (kw * 1000) / (220 * 0.8 * 0.9);
 
-html+="<b>Dòng motor 3 pha ≈ "+motor3.toFixed(2)+" A</b><br>";
-html+="<b>Dòng motor 1 pha ≈ "+motor1.toFixed(2)+" A</b><br><br>";
-
-if(ampe > motor3){
-html+="✅ Dây đủ tải cho motor 3 pha<br>";
-}else{
-html+="❌ Dây yếu cho motor 3 pha<br>";
-}
-
-if(ampe > motor1){
-html+="✅ Dây đủ tải cho motor 1 pha<br><br>";
-}else{
-html+="❌ Dây yếu cho motor 1 pha<br><br>";
 }
 
 }
@@ -222,3 +209,4 @@ kq.innerHTML=html;
 
 </body>
 </html>
+
