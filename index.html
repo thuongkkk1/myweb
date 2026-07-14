@@ -7,7 +7,10 @@
 <style>
 body{margin:0;font-family:monospace;background:#f2f2f2;display:flex;justify-content:center;padding:30px 15px}
 .box{width:520px;max-width:100%;background:#fff;padding:20px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.inputRow{display:flex;gap:8px;align-items:stretch}
+.inputRow input{flex:1}
 input{width:100%;padding:10px;box-sizing:border-box;border:3px solid #333;border-radius:6px;font-size:16px;margin-top:4px}
+button{padding:10px 14px;border:3px solid #333;border-radius:6px;background:#eee;font-weight:bold;cursor:pointer;margin-top:4px}
 hr{margin:20px 0}
 </style>
 </head>
@@ -15,9 +18,11 @@ hr{margin:20px 0}
 <div class="box">
 <h2>TÍNH DÂY</h2>
 <h3>Nhập đường kính dây (cách nhau bằng dấu cách, dấu phẩy hoặc xuống dòng)</h3>
+<div class="inputRow">
 <input id="input" type="text" inputmode="decimal" autocomplete="off" placeholder="0.55 0.55 0.60">
-<button type="button" onclick="themSpace()">Space</button>
- <div id="top" style="margin-top:15px"></div>
+<button type="button" onclick="themSpace('input')">Space</button>
+</div>
+<div id="top" style="margin-top:15px"></div>
 <div id="kq" style="margin-top:15px"></div>
 <hr>
 <h2>CHUYỂN 1 PHA → 3 PHA</h2>
@@ -26,7 +31,10 @@ hr{margin:20px 0}
 <h3>Số sợi đang quấn</h3>
 <input id="soSoi" type="number" inputmode="numeric">
 <h3>Đường kính dây hiện tại</h3>
+<div class="inputRow">
 <input id="duongKinh" type="text" inputmode="decimal" autocomplete="off" placeholder="0.55 0.55 0.55">
+<button type="button" onclick="themSpace('duongKinh')">Space</button>
+</div>
 <div id="doi3pha" style="margin-top:15px"></div>
 </div>
 <script>
@@ -53,6 +61,14 @@ function tinh3P(){
  if(isNaN(v)||isNaN(s)||s<=0||tong<=0){doi3pha.innerHTML="";return;}
  let dTong=Math.sqrt(4*tong/Math.PI),day3=dTong/Math.sqrt(3),vong3=(v/s)/Math.sqrt(3);
  doi3pha.innerHTML=`<b>Đường kính tương đương:</b> ${dTong.toFixed(3)} mm<br><b>Đường kính 3 pha:</b> ${day3.toFixed(3)} mm<br><b>Vòng sau khi chia:</b> ${vong3.toFixed(2)} vòng`;
+}
+function themSpace(id){
+ const o=document.getElementById(id);
+ const s=o.selectionStart,e=o.selectionEnd;
+ o.value=o.value.substring(0,s)+" "+o.value.substring(e);
+ o.focus();
+ o.selectionStart=o.selectionEnd=s+1;
+ tinh();tinh3P();
 }
 </script>
 </body></html>
