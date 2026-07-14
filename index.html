@@ -42,7 +42,7 @@ const input=document.getElementById("input"),topDiv=document.getElementById("top
 const tongVong=document.getElementById("tongVong"),soSoi=document.getElementById("soSoi"),duongKinh=document.getElementById("duongKinh"),doi3pha=document.getElementById("doi3pha");
 [input,tongVong,soSoi,duongKinh].forEach(e=>e.addEventListener("input",()=>{tinh();tinh3P();}));
 function tongTietDien(text){
- text=(text||"").replace(/\n/g," ");
+text=(text||"").trim();
  let arr=text.trim().split(/\s+/),tong=0;
  for(let a of arr){let d=parseFloat(a);if(!isNaN(d))tong+=Math.PI*d*d/4;}
  return tong;
