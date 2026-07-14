@@ -43,21 +43,21 @@ const tongVong=document.getElementById("tongVong"),soSoi=document.getElementById
 [input,tongVong,soSoi,duongKinh].forEach(e=>e.addEventListener("input",()=>{tinh();tinh3P();}));
 function tongTietDien(text){
 
-    text = (text || "").replace(/\n/g," ").trim();
+    if(!text) return 0;
 
-    let arr = text.split(/\s+/);
+    text = text.replace(/，/g,","); // đổi dấu phẩy kiểu iPhone nếu có
+
+    let arr = text.match(/\d+(?:[.,]\d+)?/g);
+
+    if(!arr) return 0;
+
     let tong = 0;
 
     for(let a of arr){
-
-        a = a.replace(",", ".");
-
-        let d = parseFloat(a);
-
+        let d = Number(a.replace(",", "."));
         if(!isNaN(d)){
             tong += Math.PI * d * d / 4;
         }
-
     }
 
     return tong;
